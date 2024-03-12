@@ -7,7 +7,8 @@ import org.example.lexer.tokenMatcher.TokenMatcherImpl
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val text = "let x: number = 5\nlet aAf_a: string = 'hello: i am world; very much a test @ heyo'"
+    val text = "let x: number = 5\nlet aAfia: string = 'hello: i am world; very much a test @ heyo';" +
+            "\nlet sugon_deese : number = 1 * 2 + 3 / 4"
 
     val strDiv = StringDividerImpl()
     val tokenMatcher = TokenMatcherImpl()
