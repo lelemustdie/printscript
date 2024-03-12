@@ -1,5 +1,6 @@
 package lexer.tokenMatchers
 import org.example.token.TokenType
+import javax.swing.text.Position
 
 class TokenMatcherImpl : TokenMatcher {
     private val regexMap: Map<Regex, TokenType> = mapOf(
@@ -18,13 +19,13 @@ class TokenMatcherImpl : TokenMatcher {
         Regex("/") to TokenType.OPERATOR_DIVIDE,
         Regex("println") to TokenType.OPERATOR_PRINTLN
     )
-    override fun getToken(input: String, pos: Int): TokenType {
+    override fun getToken(input: String, position: Int): TokenType {
         for ((regex, tokenType) in regexMap) {
             if (regex.matches(input)) {
                 return tokenType
             }
         }
-        throw IllegalArgumentException("No matching token for input: $input, in line: $pos")
+        throw IllegalArgumentException("No matching token for input: $input, in line: $position")
     }
 
 }

@@ -4,12 +4,12 @@ import org.example.token.TokenType
 
 class TokenFactory {
     companion object {
-        fun createToken(type: TokenType, value: String, pos: Int): Token {
-            return Token(type, value, pos)
+        fun createValueToken(type: TokenType, value: String, position: Int): Token {
+            return Token(type, value, position)
         }
 
-        fun createToken(type: TokenType, pos: Int): Token {
-            return Token(type, pos)
+        fun createToken(type: TokenType, position: Int): Token {
+            return Token(type, position)
         }
     }
 }

@@ -13,7 +13,7 @@ class LexerImpl(private val tokenMatcher: TokenMatcher, private val stringDivide
         var pos = 0
         for (line in lines) {
             for (word in line) {
-                val token = TokenFactory.createToken(tokenMatcher.getToken(word, pos), word, pos)
+                val token = TokenFactory.createValueToken(tokenMatcher.getToken(word, pos), word, pos)
                 tokens.add(token)
                 pos += word.length + 1
             }
