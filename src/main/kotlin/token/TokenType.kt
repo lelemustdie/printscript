@@ -4,6 +4,7 @@ enum class TokenType {
     KEYWORD_LET,
     IDENTIFIER,
     ASSIGNATOR,  // =
+    COLON,
     SEMICOLON,
     LITERAL_NUMBER,
     LITERAL_STRING,
