@@ -1,6 +1,4 @@
-package org.example.lexer.tokenMatcher
-
-import org.example.token.Token
+package lexer.tokenMatchers
 import org.example.token.TokenType
 
 class TokenMatcherImpl : TokenMatcher {
@@ -20,10 +18,10 @@ class TokenMatcherImpl : TokenMatcher {
         Regex("/") to TokenType.OPERATOR_DIVIDE,
         Regex("println") to TokenType.OPERATOR_PRINTLN
     )
-    override fun getToken(input: String, pos: Int): Token {
+    override fun getToken(input: String, pos: Int): TokenType {
         for ((regex, tokenType) in regexMap) {
             if (regex.matches(input)) {
-                return Token(tokenType, input, pos)
+                return tokenType
             }
         }
         throw IllegalArgumentException("No matching token for input: $input, in line: $pos")

@@ -1,7 +1,8 @@
 package org.example.lexer
 
+import factories.TokenFactory
 import org.example.lexer.stringDivider.StringDivider
-import org.example.lexer.tokenMatcher.TokenMatcher
+import lexer.tokenMatchers.TokenMatcher
 import org.example.token.Token
 
 class LexerImpl(private val tokenMatcher: TokenMatcher, private val stringDivider: StringDivider) : Lexer{
@@ -12,7 +13,8 @@ class LexerImpl(private val tokenMatcher: TokenMatcher, private val stringDivide
         var pos = 0
         for (line in lines) {
             for (word in line) {
-                tokens.add(tokenMatcher.getToken(word, pos))
+                val token = TokenFactory.createToken(tokenMatcher.getToken(word, pos), word, pos)
+                tokens.add(token)
                 pos += word.length + 1
             }
         }
