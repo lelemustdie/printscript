@@ -12,7 +12,7 @@ enum class TokenType {
     TYPE_NUMBER,
     OPERATOR_PLUS,
     OPERATOR_MINUS,
-    OPERATOR_MULTIPLY,
-    OPERATOR_DIVIDE,
-    OPERATOR_PRINTLN,
+    OPERATOR_MULTIPLY, //priority 1
+    OPERATOR_DIVIDE,    //priority 1
+    OPERATOR_PRINTLN,   //priority last
 }
