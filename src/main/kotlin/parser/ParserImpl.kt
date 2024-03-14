@@ -1,90 +1,89 @@
 package org.example.parser
 
-import org.example.ast.AstNode
+import org.example.ast.Node
+import org.example.ast.nodes.*
 import org.example.token.Token
 import org.example.token.TokenType
 
 class ParserImpl (private val tokens: List<Token>) : Parser{
-    private var currentToken = 0
-    private val statements = mutableListOf<AstNode>()
-    override fun parse(): AstNode {
-        while (currentToken < tokens.size) {
-            val statement = parseStatement(tokens)
+    var index = 0
+    override fun parse(): Node {
+        val statements = mutableListOf<Node>()
+        while (index < tokens.size) {
+            val statement = parseStatement(tokens, index)
             statements.add(statement)
-            currentToken++
+            index++
         }
-        return buildAst(statements)
+        return ProgramNode(statements)
     }
-    private fun parseStatement(tokens: List<Token>): AstNode {
-        val token = getCurrentToken(tokens, currentToken)
+    private fun parseStatement(tokens: List<Token>,index : Int): Node {
+        val token = getCurrentToken(tokens, index)
         return when (token.getType()) {
             TokenType.KEYWORD_LET -> startAssignationStatement()              //skip Node
             TokenType.SEMICOLON -> endStatement()                             //skip Node
-            TokenType.OPERATOR_PRINTLN -> startPrintStatement()               //skip Node
+//            TokenType.OPERATOR_PRINTLN -> startPrintStatement()               //skip Node
 
-            TokenType.ASSIGNATOR -> TODO()                                    //assignation Node
-
-//            TokenType.IDENTIFIER -> TODO()                                    //variable Node
-//            TokenType.TYPE_STRING, TokenType.TYPE_NUMBER -> TODO()            //variable Node
-//            TokenType.COLON -> TODO()                                         //skip/variable Node
-//
-//            TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> TODO()      //value Node
-//            TokenType.OPERATOR_PLUS, TokenType.OPERATOR_MINUS -> TODO()       //value Node
-//            TokenType.OPERATOR_MULTIPLY, TokenType.OPERATOR_DIVIDE -> TODO()  //value Node
-
+            TokenType.IDENTIFIER -> startReasignationStatement()                //identifier Node
+            else -> throw Exception("Invalid statement")
         }
     }
 
+    private fun startReasignationStatement(): Node {
+        val idNode = IdentifierNode(searchForToken(listOf(TokenType.IDENTIFIER)))
+        val valueNode = createValueNode()
+        return DeclarationNode(idNode, valueNode)
+    }
     private fun getCurrentToken(tokens :List<Token>, current : Int): Token {
         return tokens[0 + current]
     }
 
-    private fun startAssignationStatement(): AstNode {
-        val asignatorToken = searchForAssignator()
-        return AstNode(asignatorToken, createVariableNode(), createValueNode())
+    private fun startAssignationStatement(): Node {
+        index = searchForToken(listOf(TokenType.SEMICOLON)).getPosition()
+        return DeclarationNode(createVariableNode(), createValueNode())
     }
 
-    private fun createValueNode(): AstNode {
-        return AstNode()
-    }//cantidad de operadores = cantidad de nodos
-
-    private fun createVariableNode(): AstNode {
-        return AstNode(searchForColon(), AstNode(searchForIdentifier(),null,null), AstNode(searchForType(),null,null))
-    }
-
-    private fun searchForAssignator(): Token{
-        val token = getCurrentToken(tokens, currentToken)
-        if (token.getType() == TokenType.ASSIGNATOR) {
-            return token
+    private fun createValueNode(): Node {
+        try {
+            val opPlusMinus = searchForToken(listOf(TokenType.OPERATOR_PLUS, TokenType.OPERATOR_MINUS))
+            val left = createValueNode()
+            val right = createValueNode()
+            return BinaryOperationNode(opPlusMinus, left, right)
+        } catch (e: Exception) {
+            try {
+                val opMulDiv = searchForToken(listOf(TokenType.OPERATOR_MULTIPLY, TokenType.OPERATOR_DIVIDE))
+                val left = createValueNode()
+                val right = createValueNode()
+                return BinaryOperationNode(opMulDiv, left, right)
+            } catch (e: Exception) {
+                val literalToken = searchForToken(listOf(TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING))
+                return LiteralNode(literalToken)
+            }
         }
-        currentToken++
-        return searchForAssignator()
     }
 
-    private fun searchForColon(): Token{
-        val token = getCurrentToken(tokens, currentToken)
-        if (token.getType() == TokenType.COLON) {
-            return token
-        }
-        currentToken++
-        return searchForColon()
+    private fun createVariableNode(): Node {
+        val idNode = IdentifierNode(searchForToken(listOf(TokenType.IDENTIFIER)))
+        val typeNode = TypeNode(searchForToken(listOf(TokenType.TYPE_STRING, TokenType.TYPE_NUMBER)))
+        return DeclarationNode(idNode, typeNode)
     }
 
-    private fun searchForIdentifier(): Token{
-        val token = getCurrentToken(tokens, currentToken)
-        if (token.getType() == TokenType.IDENTIFIER) {
-            return token
+    private fun searchForToken(types: List<TokenType>): Token{
+        for (token in tokens) {
+            if (token.getType()==TokenType.SEMICOLON){
+                throw Exception("No matching token found")
+            }
+            if (types.contains(token.getType())) {
+                return token
+            }
         }
-        currentToken++
-        return searchForIdentifier()
+        throw Exception("No matching token found")
     }
 
-    private fun searchForType(): Token{
-        val token = getCurrentToken(tokens, currentToken)
-        if (token.getType() == TokenType.TYPE_STRING || token.getType() == TokenType.TYPE_NUMBER) {
-            return token
-        }
-        currentToken++
-        return searchForType()
+    private fun endStatement(): Node {
+        return EndStatementNode()
     }
+
+//    private fun startPrintStatement(): Node {
+//
+//    }
 }

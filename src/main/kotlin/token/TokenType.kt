@@ -15,5 +15,6 @@ enum class TokenType {
     OPERATOR_MULTIPLY, //priority 1
     OPERATOR_DIVIDE,    //priority 1
     OPERATOR_PRINTLN,   //priority last
-    //parenthesis
+    PARENTHESIS_OPEN,
+    PARENTHESIS_CLOSE,
 }

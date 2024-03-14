@@ -1,14 +1,12 @@
 package org.example.ast.nodes
 
-import org.example.ast.Node
 import org.example.ast.NodeVisitor
+import org.example.token.Token
 
-class DeclarationNode(Variable: Node, Value : Node): StatementNode() {
+class TypeNode(type: Token): ExpressionNode() {
     override fun <T> accept(visitor: NodeVisitor<T>): T {
         return visitor.visit(this)
     }
 
-    val variable = Variable
-    val value = Value
-
+    val type = type
 }
