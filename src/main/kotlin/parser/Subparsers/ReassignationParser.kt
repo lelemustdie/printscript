@@ -12,7 +12,7 @@ class ReassignationParser(private val tokens: List<Token>): Parser {
     override fun parse(): Node {
         val idNode = IdentifierNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.IDENTIFIER)))
         val valueNode = OperationParser.createValueNode(OperationCropper.crop(tokens).listIterator())
-            ?: throw Exception("Expected value after assignment operator")
+            ?: throw Exception("Expected value after reassignment operator")
         return DeclarationNode(idNode, valueNode)
     }
 
