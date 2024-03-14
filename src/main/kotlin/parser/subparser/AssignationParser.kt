@@ -1,11 +1,11 @@
-package org.example.parser.Subparsers
+package org.example.parser.subparser
 
 import org.example.ast.Node
 import org.example.ast.nodes.DeclarationNode
 import org.example.ast.nodes.IdentifierNode
 import org.example.ast.nodes.TypeNode
 import org.example.parser.Parser
-import org.example.parser.Subparsers.OperationCropper
+import org.example.parser.subparsers.OperationCropper
 import org.example.parser.TokenSearcher
 import org.example.token.Token
 import org.example.token.TokenType

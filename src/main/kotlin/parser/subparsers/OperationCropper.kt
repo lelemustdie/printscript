@@ -1,4 +1,4 @@
-package org.example.parser.Subparsers
+package org.example.parser.subparsers
 
 import org.example.token.Token
 import org.example.token.TokenType
