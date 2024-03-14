@@ -1,4 +1,4 @@
-package org.example.parser.Subparsers
+package org.example.parser.subparser
 
 import org.example.ast.Node
 import org.example.ast.nodes.BinaryOperationNode

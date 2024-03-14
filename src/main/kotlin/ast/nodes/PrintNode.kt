@@ -7,4 +7,8 @@ class PrintNode(private val printable: Node): Node {
     override fun <T> accept(visitor: NodeVisitor<T>): T {
         return visitor.visit(this)
     }
+
+    override fun toString(): String {
+        return "PrintNode(printable=$printable)"
+    }
 }

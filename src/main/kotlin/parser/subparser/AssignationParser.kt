@@ -5,6 +5,7 @@ import org.example.ast.nodes.DeclarationNode
 import org.example.ast.nodes.IdentifierNode
 import org.example.ast.nodes.TypeNode
 import org.example.parser.Parser
+import org.example.parser.Subparsers.OperationCropper
 import org.example.parser.TokenSearcher
 import org.example.token.Token
 import org.example.token.TokenType
@@ -12,7 +13,7 @@ import org.example.token.TokenType
 class AssignationParser (private val tokens: List<Token>): Parser {
 
     override fun parse(): Node {
-        val valueNode = OperationParser.createValueNode(OperationCropper.crop(tokens).listIterator())
+        val valueNode = OperationParser.createValueNode(OperationCropper.crop(tokens,TokenType.ASSIGNATOR).listIterator())
             ?: throw Exception("Expected value after assignment operator")
         return DeclarationNode(createVariableNode(), valueNode)
     }

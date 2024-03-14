@@ -2,9 +2,9 @@ package org.example.parser
 
 import org.example.ast.Node
 import org.example.ast.nodes.*
-import org.example.parser.Subparsers.AssignationParser
-import org.example.parser.Subparsers.PrintlnParser
-import org.example.parser.Subparsers.ReassignationParser
+import org.example.parser.subparser.AssignationParser
+import org.example.parser.subparser.PrintlnParser
+import org.example.parser.subparser.ReassignationParser
 import org.example.token.Token
 import org.example.token.TokenType
 
@@ -21,7 +21,7 @@ class ParserImpl (private val tokens: List<Token>) : Parser{
         val firstToken = tokens[0]
         return when (firstToken.getType()) {
             TokenType.KEYWORD_LET -> startAssignationStatement(tokens)               //skip Node
-            TokenType.OPERATOR_PRINTLN -> startPrintStatement(tokens)               //skip Node
+            TokenType.OPERATOR_PRINTLN -> startPrintStatement(tokens)                //skip Node
             TokenType.IDENTIFIER -> startReasignationStatement(tokens)              //identifier Node
             else -> throw Exception("Invalid statement")
         }
