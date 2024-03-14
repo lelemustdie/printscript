@@ -18,16 +18,20 @@ class ParserImpl (private val tokens: List<Token>) : Parser{
     private fun parseStatement(tokens: List<Token>): AstNode {
         val token = getCurrentToken(tokens, currentToken)
         return when (token.getType()) {
-            TokenType.KEYWORD_LET -> startAssignationStatement() //skip token
-            TokenType.IDENTIFIER -> TODO()
-            TokenType.ASSIGNATOR -> TODO()
-            TokenType.COLON -> TODO()
-            TokenType.SEMICOLON -> endStatement() //skip token
-            TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> TODO()
-            TokenType.TYPE_STRING,TokenType.TYPE_NUMBER -> TODO()
-            TokenType.OPERATOR_PLUS, TokenType.OPERATOR_MINUS -> TODO()
-            TokenType.OPERATOR_MULTIPLY, TokenType.OPERATOR_DIVIDE -> TODO()
-            TokenType.OPERATOR_PRINTLN -> startPrintStatement() // skip token
+            TokenType.KEYWORD_LET -> startAssignationStatement()              //skip Node
+            TokenType.SEMICOLON -> endStatement()                             //skip Node
+            TokenType.OPERATOR_PRINTLN -> startPrintStatement()               //skip Node
+
+            TokenType.ASSIGNATOR -> TODO()                                    //assignation Node
+
+//            TokenType.IDENTIFIER -> TODO()                                    //variable Node
+//            TokenType.TYPE_STRING, TokenType.TYPE_NUMBER -> TODO()            //variable Node
+//            TokenType.COLON -> TODO()                                         //skip/variable Node
+//
+//            TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> TODO()      //value Node
+//            TokenType.OPERATOR_PLUS, TokenType.OPERATOR_MINUS -> TODO()       //value Node
+//            TokenType.OPERATOR_MULTIPLY, TokenType.OPERATOR_DIVIDE -> TODO()  //value Node
+
         }
     }
 
@@ -37,7 +41,15 @@ class ParserImpl (private val tokens: List<Token>) : Parser{
 
     private fun startAssignationStatement(): AstNode {
         val asignatorToken = searchForAssignator()
-        return AstNode(asignatorToken, null, null)
+        return AstNode(asignatorToken, createVariableNode(), createValueNode())
+    }
+
+    private fun createValueNode(): AstNode {
+        return AstNode()
+    }//cantidad de operadores = cantidad de nodos
+
+    private fun createVariableNode(): AstNode {
+        return AstNode(searchForColon(), AstNode(searchForIdentifier(),null,null), AstNode(searchForType(),null,null))
     }
 
     private fun searchForAssignator(): Token{
@@ -47,5 +59,32 @@ class ParserImpl (private val tokens: List<Token>) : Parser{
         }
         currentToken++
         return searchForAssignator()
+    }
+
+    private fun searchForColon(): Token{
+        val token = getCurrentToken(tokens, currentToken)
+        if (token.getType() == TokenType.COLON) {
+            return token
+        }
+        currentToken++
+        return searchForColon()
+    }
+
+    private fun searchForIdentifier(): Token{
+        val token = getCurrentToken(tokens, currentToken)
+        if (token.getType() == TokenType.IDENTIFIER) {
+            return token
+        }
+        currentToken++
+        return searchForIdentifier()
+    }
+
+    private fun searchForType(): Token{
+        val token = getCurrentToken(tokens, currentToken)
+        if (token.getType() == TokenType.TYPE_STRING || token.getType() == TokenType.TYPE_NUMBER) {
+            return token
+        }
+        currentToken++
+        return searchForType()
     }
 }
