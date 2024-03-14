@@ -1,7 +1,8 @@
 package org.example.parser
 
-import org.example.ast.AstNode
+import org.example.ast.Node
 
 interface Parser {
-    fun parse(): AstNode
+    fun parse(): Node
+
 }

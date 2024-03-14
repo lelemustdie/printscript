@@ -9,4 +9,7 @@ interface NodeVisitor<T> {
     fun visit(literalNode: LiteralNode): T
     fun visit(identifierNode: IdentifierNode): T
     fun visit(programNode: ProgramNode): T
+    fun visit(typeNode: TypeNode): T
+    fun visit(endStatementNode: EndStatementNode): T
+    fun visit(printNode: PrintNode): T
 }
