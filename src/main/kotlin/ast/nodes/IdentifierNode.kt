@@ -3,10 +3,12 @@ package org.example.ast.nodes
 import org.example.ast.NodeVisitor
 import org.example.token.Token
 
-class IdentifierNode(id : Token?): ExpressionNode() {
+class IdentifierNode(private val id : Token): ExpressionNode() {
     override fun <T> accept(visitor: NodeVisitor<T>): T {
         return visitor.visit(this)
     }
 
-    val id = id
+    override fun toString(): String {
+        return "IdentifierNode(id=$id)"
+    }
 }

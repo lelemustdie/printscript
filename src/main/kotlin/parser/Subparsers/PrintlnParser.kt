@@ -7,7 +7,8 @@ import org.example.token.Token
 
 class PrintlnParser(private val tokens: List<Token>): Parser{
     override fun parse(): Node {
-        val valueNode = OperationParser.createValueNode(tokens.listIterator())
+        val valueNode = OperationParser.createValueNode(OperationCropper.crop(tokens).listIterator())
+            ?: throw Exception("Expected value after assignment operator")
         return PrintNode(valueNode)
     }
 }

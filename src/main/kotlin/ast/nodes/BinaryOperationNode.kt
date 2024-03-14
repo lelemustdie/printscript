@@ -4,13 +4,13 @@ import org.example.ast.Node
 import org.example.ast.NodeVisitor
 import org.example.token.Token
 
-class BinaryOperationNode(value: Token, rightChild : Node, leftChild: Node): ExpressionNode() {
+class BinaryOperationNode(private val value: Token, private val leftChild: Node, private val rightChild: Node): ExpressionNode() {
     override fun <T> accept(visitor: NodeVisitor<T>): T {
         return visitor.visit(this)
     }
 
-    val treeNode = value
-    val rChild = rightChild
-    val lChild = leftChild
+    override fun toString(): String {
+        return "BinaryOperationNode(value=$value, leftChild=$leftChild, rightChild=$rightChild)"
+    }
 
 }
