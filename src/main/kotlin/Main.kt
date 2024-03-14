@@ -8,8 +8,8 @@ import org.example.parser.ParserImpl
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val text = "let x: number = 5+2;"
-
+    val text = "let x: number = (2 * 5 + 2) / 5; t=(3 + 5); \n println(5); "
+    // \\
     val strDiv = StringDividerImpl()
     val tokenMatcher = TokenMatcherImpl()
     val lexer = LexerImpl(tokenMatcher, strDiv)
