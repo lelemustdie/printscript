@@ -21,7 +21,7 @@ class ParserImpl (private val tokens: List<Token>) : Parser{
         return when (token.getType()) {
             TokenType.KEYWORD_LET -> startAssignationStatement()              //skip Node
             TokenType.SEMICOLON -> endStatement()                             //skip Node
-//            TokenType.OPERATOR_PRINTLN -> startPrintStatement()               //skip Node
+            TokenType.OPERATOR_PRINTLN -> startPrintStatement()               //skip Node
 
             TokenType.IDENTIFIER -> startReasignationStatement()                //identifier Node
             else -> throw Exception("Invalid statement")
@@ -83,7 +83,7 @@ class ParserImpl (private val tokens: List<Token>) : Parser{
         return EndStatementNode()
     }
 
-//    private fun startPrintStatement(): Node {
-//
-//    }
+    private fun startPrintStatement(): Node {
+        return createValueNode()
+    }
 }
