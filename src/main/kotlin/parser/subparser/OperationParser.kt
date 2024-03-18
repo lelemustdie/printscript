@@ -2,6 +2,7 @@ package org.example.parser.subparser
 
 import org.example.ast.Node
 import org.example.ast.nodes.BinaryOperationNode
+import org.example.ast.nodes.IdentifierNode
 import org.example.ast.nodes.LiteralNode
 import org.example.token.Token
 import org.example.token.TokenType
@@ -19,6 +20,7 @@ class OperationParser {
             val token = iterator.next()
             return when (token.getType()) {
                 TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> LiteralNode(token)
+                TokenType.IDENTIFIER -> IdentifierNode(token)
                 else -> error("Unexpected token: $token")
             }
         }
@@ -58,6 +60,7 @@ class OperationParser {
             val token = iterator.next()
             return when (token.getType()) {
                 TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> LiteralNode(token)
+                TokenType.IDENTIFIER -> IdentifierNode(token)
                 TokenType.PARENTHESIS_OPEN -> {
                     val node = createComplexExpressionNode(iterator) ?: error("Expected expression inside brackets")
                     if (!iterator.hasNext() || iterator.next().getType() != TokenType.PARENTHESIS_CLOSE) {
