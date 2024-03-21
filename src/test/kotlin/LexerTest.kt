@@ -1,7 +1,5 @@
 import org.example.lexer.Lexer
 import org.example.lexer.LexerImpl
-import org.example.lexer.stringDivider.StringDividerImpl
-import org.example.lexer.tokenMatchers.TokenMatcherImpl
 import org.example.token.Token
 import org.example.token.TokenType
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -14,9 +12,7 @@ class LexerTest {
 
     @BeforeEach
     fun setUp() {
-        val strDiv = StringDividerImpl()
-        val tokenMatcher = TokenMatcherImpl()
-        lexer = LexerImpl(tokenMatcher, strDiv)
+        lexer = LexerImpl()
     }
 
     @Test

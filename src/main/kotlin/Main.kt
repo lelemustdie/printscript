@@ -4,7 +4,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.example.lexer.LexerImpl
 import org.example.lexer.stringDivider.StringDividerImpl
-import org.example.lexer.tokenMatchers.TokenMatcherImpl
 import org.example.parser.ParserImpl
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -13,8 +12,7 @@ fun main() {
     val text = "let x: number = (2 * 5 + 2) / 5; t=(3 + 5); \n println(5); "
     // \\
     val strDiv = StringDividerImpl()
-    val tokenMatcher = TokenMatcherImpl()
-    val lexer = LexerImpl(tokenMatcher, strDiv)
+    val lexer = LexerImpl()
 
     val dividedString = strDiv.stringToList(text)
     val tokens = lexer.tokenize(text)
