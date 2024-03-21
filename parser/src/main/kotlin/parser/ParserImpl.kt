@@ -1,6 +1,6 @@
 package org.example.parser
 
-import org.example.ast.Node
+import org.example.ast.nodes.Node
 import org.example.ast.nodes.*
 import org.example.parser.subparser.AssignationParser
 import org.example.parser.subparser.PrintlnParser

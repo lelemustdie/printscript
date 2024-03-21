@@ -1,14 +1,13 @@
 package org.example.ast.nodes
 
+import kotlinx.serialization.Serializable
 import org.example.ast.NodeVisitor
 import org.example.token.Token
 
-class TypeNode(private val type: Token): ExpressionNode() {
+@Serializable
+data class TypeNode(private val typeToken: Token): ExpressionNode() {
     override fun <T> accept(visitor: NodeVisitor<T>): T {
         return visitor.visit(this)
     }
 
-    override fun toString(): String {
-        return "TypeNode(type=$type)"
-    }
 }

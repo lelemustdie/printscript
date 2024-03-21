@@ -1,5 +1,6 @@
 package org.example.ast.nodes
 
-import org.example.ast.Node
+import kotlinx.serialization.Serializable
 
-sealed class ExpressionNode: Node
+@Serializable
+sealed class ExpressionNode: Node()

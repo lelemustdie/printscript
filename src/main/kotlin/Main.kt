@@ -1,5 +1,7 @@
 package org.example
 
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.example.lexer.LexerImpl
 import org.example.lexer.stringDivider.StringDividerImpl
 import org.example.lexer.tokenMatchers.TokenMatcherImpl
@@ -22,5 +24,6 @@ fun main() {
 
     val parser = ParserImpl(tokens)
     val ast = parser.parse()
-    println("AST: $ast")
+    val astJson = Json.encodeToString(ast)
+    println("AST: $astJson")
 }
