@@ -1,9 +1,6 @@
 package org.example.parser.subparser
 
-import org.example.ast.nodes.Node
-import org.example.ast.nodes.BinaryOperationNode
-import org.example.ast.nodes.IdentifierNode
-import org.example.ast.nodes.LiteralNode
+import org.example.ast.nodes.*
 import org.example.token.Token
 import org.example.token.TokenType
 
@@ -19,8 +16,8 @@ class OperationParser {
             // If no complex expression found, try parsing literals
             val token = iterator.next()
             return when (token.getType()) {
-                TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> LiteralNode(token)
-                TokenType.IDENTIFIER -> IdentifierNode(token)
+                TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> ExpressionNode.LiteralNode(token)
+                TokenType.IDENTIFIER -> ExpressionNode.IdentifierNode(token)
                 else -> error("Unexpected token: $token")
             }
         }
@@ -31,7 +28,7 @@ class OperationParser {
                 val token = iterator.next()
                 if (token.getType() in listOf(TokenType.OPERATOR_PLUS, TokenType.OPERATOR_MINUS)) {
                     val rightNode = createTermNode(iterator) ?: error("Expected term after operator")
-                    node = BinaryOperationNode(token, node!!, rightNode)
+                    node = ExpressionNode.BinaryOperationNode(token, node!!, rightNode)
                 } else {
                     iterator.previous()
                     break
@@ -46,7 +43,7 @@ class OperationParser {
                 val token = iterator.next()
                 if (token.getType() in listOf(TokenType.OPERATOR_MULTIPLY, TokenType.OPERATOR_DIVIDE)) {
                     val rightNode = createFactorNode(iterator) ?: error("Expected factor after operator")
-                    node = BinaryOperationNode(token, node!!, rightNode)
+                    node = ExpressionNode.BinaryOperationNode(token, node!!, rightNode)
                 } else {
                     iterator.previous()
                     break
@@ -59,8 +56,8 @@ class OperationParser {
             if (!iterator.hasNext()) return null
             val token = iterator.next()
             return when (token.getType()) {
-                TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> LiteralNode(token)
-                TokenType.IDENTIFIER -> IdentifierNode(token)
+                TokenType.LITERAL_NUMBER, TokenType.LITERAL_STRING -> ExpressionNode.LiteralNode(token)
+                TokenType.IDENTIFIER -> ExpressionNode.IdentifierNode(token)
                 TokenType.PARENTHESIS_OPEN -> {
                     val node = createComplexExpressionNode(iterator) ?: error("Expected expression inside brackets")
                     if (!iterator.hasNext() || iterator.next().getType() != TokenType.PARENTHESIS_CLOSE) {

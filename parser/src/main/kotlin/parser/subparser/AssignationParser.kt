@@ -14,13 +14,13 @@ class AssignationParser (private val tokens: List<Token>): Parser {
             OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator()
         )
             ?: throw Exception("Expected value after assignment operator")
-        return AssignationNode(createVariableNode(), valueNode)
+        return StatementNode.AssignationNode(createVariableNode(), valueNode)
     }
 
 
     private fun createVariableNode(): Node {
-        val idNode = IdentifierNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.IDENTIFIER)))
-        val typeNode = TypeNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.TYPE_STRING, TokenType.TYPE_NUMBER)))
+        val idNode = ExpressionNode.IdentifierNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.IDENTIFIER)))
+        val typeNode = ExpressionNode.TypeNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.TYPE_STRING, TokenType.TYPE_NUMBER)))
         return DeclarationNode(idNode, typeNode)
     }
 }
