@@ -2,7 +2,7 @@ package org.example
 
 import org.example.lexer.LexerImpl
 import org.example.lexer.stringDivider.StringDividerImpl
-import lexer.tokenMatchers.TokenMatcherImpl
+import org.example.lexer.tokenMatchers.TokenMatcherImpl
 import org.example.parser.ParserImpl
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or

@@ -1,4 +1,4 @@
-package lexer.tokenMatchers
+package org.example.lexer.tokenMatchers
 import org.example.token.TokenType
 
 interface TokenMatcher {

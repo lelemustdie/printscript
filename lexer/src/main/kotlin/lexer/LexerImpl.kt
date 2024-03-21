@@ -1,11 +1,11 @@
 package org.example.lexer
 
-import factories.TokenFactory
+import org.example.factories.TokenFactory
 import org.example.lexer.stringDivider.StringDivider
-import lexer.tokenMatchers.TokenMatcher
+import org.example.lexer.tokenMatchers.TokenMatcher
 import org.example.token.Token
 
-class LexerImpl(private val tokenMatcher: TokenMatcher, private val stringDivider: StringDivider) : Lexer{
+class LexerImpl(private val tokenMatcher: TokenMatcher, private val stringDivider: StringDivider) : Lexer {
 
     override fun tokenize(input: String): List<Token> {
         return stringDivider.stringToList(input).flatMapIndexed { lineIndex, line ->

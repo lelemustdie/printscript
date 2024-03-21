@@ -1,4 +1,4 @@
-package factories
+package org.example.factories
 import org.example.token.Token
 import org.example.token.TokenType
 

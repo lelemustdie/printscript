@@ -13,7 +13,9 @@ import org.example.token.TokenType
 class AssignationParser (private val tokens: List<Token>): Parser {
 
     override fun parse(): Node {
-        val valueNode = OperationParser.createValueNode(OperationCropper.crop(tokens,TokenType.ASSIGNATOR).listIterator())
+        val valueNode = OperationParser.createValueNode(
+            OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator()
+        )
             ?: throw Exception("Expected value after assignment operator")
         return DeclarationNode(createVariableNode(), valueNode)
     }

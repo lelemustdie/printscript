@@ -13,6 +13,9 @@ repositories {
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(project(":common"))
+    implementation(project(":parser"))
+    implementation(project(":lexer"))
 }
 
 tasks.test {

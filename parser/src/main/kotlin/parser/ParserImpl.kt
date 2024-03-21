@@ -8,7 +8,7 @@ import org.example.parser.subparser.ReassignationParser
 import org.example.token.Token
 import org.example.token.TokenType
 
-class ParserImpl (private val tokens: List<Token>) : Parser{
+class ParserImpl (private val tokens: List<Token>) : Parser {
     override fun parse(): Node {
         val statements = separateStatements(tokens)
         val nodes = mutableListOf<Node>()
