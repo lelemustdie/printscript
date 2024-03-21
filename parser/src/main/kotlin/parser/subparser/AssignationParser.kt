@@ -1,9 +1,6 @@
 package org.example.parser.subparser
 
-import org.example.ast.nodes.Node
-import org.example.ast.nodes.DeclarationNode
-import org.example.ast.nodes.IdentifierNode
-import org.example.ast.nodes.TypeNode
+import org.example.ast.nodes.*
 import org.example.parser.Parser
 import org.example.parser.subparsers.OperationCropper
 import org.example.parser.TokenSearcher
@@ -17,7 +14,7 @@ class AssignationParser (private val tokens: List<Token>): Parser {
             OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator()
         )
             ?: throw Exception("Expected value after assignment operator")
-        return DeclarationNode(createVariableNode(), valueNode)
+        return AssignationNode(createVariableNode(), valueNode)
     }
 
 
