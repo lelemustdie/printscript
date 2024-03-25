@@ -17,4 +17,8 @@ sealed class StatementNode: Node() {
 }
 
 
+    @Serializable
+    data class DeclarationNode(private val identifier: Node,
+                               private val dataType: Node): StatementNode()
+
 }

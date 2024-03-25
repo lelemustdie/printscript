@@ -1,8 +1,8 @@
 package org.example.parser.subparser
 
-import org.example.ast.nodes.Node
-import org.example.ast.nodes.DeclarationNode
 import org.example.ast.nodes.ExpressionNode
+import org.example.ast.nodes.Node
+import org.example.ast.nodes.StatementNode
 import org.example.parser.Parser
 import org.example.parser.TokenSearcher
 import org.example.parser.subparsers.OperationCropper
@@ -16,7 +16,7 @@ class ReassignationParser(private val tokens: List<Token>): Parser {
             OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator()
         )
             ?: throw Exception("Expected value after reassignment operator")
-        return DeclarationNode(idNode, valueNode)
+        return StatementNode.DeclarationNode(idNode, valueNode)
     }
 
 }
