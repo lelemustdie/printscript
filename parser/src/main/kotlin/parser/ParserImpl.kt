@@ -9,7 +9,7 @@ import org.example.token.Token
 import org.example.token.TokenType
 
 class ParserImpl (private val tokens: List<Token>) : Parser {
-    override fun parse(): Node {
+    override fun parse(): ProgramNode {
         val statements = separateStatements(tokens)
         val nodes = mutableListOf<Node>()
         for (statement in statements) {
