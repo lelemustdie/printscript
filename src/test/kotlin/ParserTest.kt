@@ -1,4 +1,6 @@
-import org.example.ast.nodes.*
+import org.example.ast.nodes.ExpressionNode
+import org.example.ast.nodes.ProgramNode
+import org.example.ast.nodes.StatementNode
 import org.example.parser.Parser
 import org.example.parser.ParserImpl
 import org.example.token.Token
@@ -27,7 +29,7 @@ class ParserTest {
         val expectedAST = ProgramNode(
             listOf(
                 StatementNode.AssignationNode(
-                    identifier = (DeclarationNode(
+                    identifier = (StatementNode.DeclarationNode(
                         identifier = (ExpressionNode.IdentifierNode(Token(TokenType.IDENTIFIER, "x", 2))),
                         dataType = (ExpressionNode.TypeNode(Token(TokenType.TYPE_NUMBER, "number", 21))))),
                     expression = (ExpressionNode.LiteralNode(Token(TokenType.LITERAL_NUMBER, "5", 10)))
