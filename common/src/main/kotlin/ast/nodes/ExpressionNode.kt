@@ -9,16 +9,10 @@ sealed class ExpressionNode: Node() {
                                    private val leftChild: Node,
                                    private val rightChild: Node): ExpressionNode()
     @Serializable
-    data class LiteralNode(private val token: Token) : ExpressionNode(){
-        fun getToken(): Token {
-            return token
-        }
+    data class LiteralNode(val token: Token) : ExpressionNode(){
     }
     @Serializable
-    data class IdentifierNode(private val id : Token): ExpressionNode(){
-        fun getId(): Token {
-            return id
-        }
+    data class IdentifierNode(val id : Token): ExpressionNode(){
     }
     @Serializable
     data class TypeNode(private val typeToken: Token): ExpressionNode()

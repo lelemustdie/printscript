@@ -5,20 +5,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class StatementNode: Node() {
     @Serializable
-    data class AssignationNode(private val identifier: StatementNode, private val expression: Node) : StatementNode() {
+    data class AssignationNode(val identifier: DeclarationNode, val expression: Node) : StatementNode() {
 
-    fun getId(): StatementNode {
-        return identifier
     }
-
-    fun getExpression(): Node {
-        return expression
-    }
-}
-
 
     @Serializable
-    data class DeclarationNode(private val identifier: Node,
-                               private val dataType: Node): StatementNode()
+    data class DeclarationNode(val identifier: ExpressionNode.IdentifierNode, val dataType: Node): StatementNode(){
+
+    }
 
 }

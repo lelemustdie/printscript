@@ -12,7 +12,7 @@ class OperationCropper() {
             for (token in tokens) {
                 if (foundEquals) {
                     newList.add(token)
-                } else if (token.getType() == type) {
+                } else if (token.type == type) {
                     foundEquals = true
                 }
             }

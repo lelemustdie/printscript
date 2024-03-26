@@ -19,7 +19,7 @@ class ParserImpl (private val tokens: List<Token>) : Parser {
     }
     private fun parseStatement(tokens: List<Token>): Node {
         val firstToken = tokens[0]
-        return when (firstToken.getType()) {
+        return when (firstToken.type) {
             TokenType.KEYWORD_LET -> startAssignationStatement(tokens)               //skip Node
             TokenType.OPERATOR_PRINTLN -> startPrintStatement(tokens)                //skip Node
             TokenType.IDENTIFIER -> startReasignationStatement(tokens)              //identifier Node
@@ -46,7 +46,7 @@ class ParserImpl (private val tokens: List<Token>) : Parser {
         val newList = mutableListOf<List<Token>>()
         var accumulated = mutableListOf<Token>()
         for (token in tokens) {
-            if (token.getType() == TokenType.SEMICOLON) {
+            if (token.type == TokenType.SEMICOLON) {
                 newList.add(accumulated)
                 accumulated = mutableListOf()
             } else {

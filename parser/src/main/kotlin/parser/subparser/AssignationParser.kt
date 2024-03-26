@@ -18,7 +18,7 @@ class AssignationParser (private val tokens: List<Token>): Parser {
     }
 
 
-    private fun createVariableNode(): StatementNode {
+    private fun createVariableNode(): StatementNode.DeclarationNode {
         val idNode = ExpressionNode.IdentifierNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.IDENTIFIER)))
         val typeNode = ExpressionNode.TypeNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.TYPE_STRING, TokenType.TYPE_NUMBER)))
         return StatementNode.DeclarationNode(idNode, typeNode)
