@@ -5,9 +5,9 @@ import org.example.token.Token
 @Serializable
 sealed class ExpressionNode: Node() {
     @Serializable
-    data class BinaryOperationNode(private val value: Token,
-                                   private val leftChild: Node,
-                                   private val rightChild: Node): ExpressionNode()
+    data class BinaryOperationNode(val value: Token,
+                                   val leftChild: Node,
+                                   val rightChild: Node): ExpressionNode()
     @Serializable
     data class LiteralNode(val token: Token) : ExpressionNode(){
     }

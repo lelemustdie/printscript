@@ -28,11 +28,12 @@ class ParserTest {
 
         val expectedAST = ProgramNode(
             listOf(
-                StatementNode.AssignationNode(
-                    identifier = (StatementNode.DeclarationNode(
-                        identifier = (ExpressionNode.IdentifierNode(Token(TokenType.IDENTIFIER, "x", 2))),
-                        dataType = (ExpressionNode.TypeNode(Token(TokenType.TYPE_NUMBER, "number", 21))))),
-                    expression = (ExpressionNode.LiteralNode(Token(TokenType.LITERAL_NUMBER, "5", 10)))
+                StatementNode.DeclarationNode(
+                    StatementNode.VariableNode(
+                        ExpressionNode.IdentifierNode(Token(TokenType.IDENTIFIER, "x", 2)),
+                        ExpressionNode.TypeNode(Token(TokenType.TYPE_NUMBER, "number", 21))
+                    ),
+                    ExpressionNode.LiteralNode(Token(TokenType.LITERAL_NUMBER, "5", 10))
                 )
             )
         )

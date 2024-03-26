@@ -16,6 +16,7 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":parser"))
     implementation(project(":lexer"))
+    implementation(project(":interpreter"))
 }
 
 tasks.test {

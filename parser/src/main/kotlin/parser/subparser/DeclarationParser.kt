@@ -7,20 +7,20 @@ import org.example.parser.TokenSearcher
 import org.example.token.Token
 import org.example.token.TokenType
 
-class AssignationParser (private val tokens: List<Token>): Parser {
+class DeclarationParser (private val tokens: List<Token>): Parser {
 
     override fun parse(): Node {
         val valueNode = OperationParser.createValueNode(
             OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator()
         )
             ?: throw Exception("Expected value after assignment operator")
-        return StatementNode.AssignationNode(createVariableNode(), valueNode)
+        return StatementNode.DeclarationNode(createVariableNode(), valueNode)
     }
 
 
-    private fun createVariableNode(): StatementNode.DeclarationNode {
+    private fun createVariableNode(): StatementNode.VariableNode {
         val idNode = ExpressionNode.IdentifierNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.IDENTIFIER)))
         val typeNode = ExpressionNode.TypeNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.TYPE_STRING, TokenType.TYPE_NUMBER)))
-        return StatementNode.DeclarationNode(idNode, typeNode)
+        return StatementNode.VariableNode(idNode, typeNode)
     }
 }
