@@ -3,24 +3,13 @@ plugins {
     kotlin("plugin.serialization") version "1.9.22"
 }
 
+apply<MainGradlePlugin>()
+
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-}
 
-dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-    implementation(project(":common"))
-    implementation(project(":parser"))
-    implementation(project(":lexer"))
-}
 
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
     jvmToolchain(21)
 }
