@@ -27,7 +27,7 @@ class InterpreterImpl(private val ast : ProgramNode) : Interpreter{
 
     private fun interpretPrintNode(node: StatementNode.PrintNode) {
         val printable = node.printable
-        println(evaluatePrintable(printable))
+        evaluatePrintable(printable)
     }
 
     private fun evaluatePrintable(node : Node){
@@ -39,7 +39,7 @@ class InterpreterImpl(private val ast : ProgramNode) : Interpreter{
     }
 
     private fun printLiteral(node : ExpressionNode.LiteralNode){
-        println(node.token.value)
+        print(node.token.value)
     }
 
     private fun printValueOfId(node : ExpressionNode.IdentifierNode){
@@ -87,6 +87,9 @@ class InterpreterImpl(private val ast : ProgramNode) : Interpreter{
         val id = node.identifier.id.value
         val expression = getExpression(node.expression)
         if(variables.containsKey(id)){
+            if (variables.getValue(id).type != expression.type){
+                throw Exception("Type mismatch")
+            }
             variables[id] = expression
         }else{
             throw Exception("Variable $id not found")
