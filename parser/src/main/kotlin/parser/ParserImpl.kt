@@ -2,7 +2,7 @@ package org.example.parser
 
 import org.example.ast.nodes.Node
 import org.example.ast.nodes.*
-import org.example.parser.subparser.AssignationParser
+import org.example.parser.subparser.DeclarationParser
 import org.example.parser.subparser.PrintlnParser
 import org.example.parser.subparser.ReassignationParser
 import org.example.token.Token
@@ -28,8 +28,8 @@ class ParserImpl (private val tokens: List<Token>) : Parser {
     }
 
     private fun startAssignationStatement(tokens: List<Token>): Node {
-        val assignationParser = AssignationParser(tokens)
-        return assignationParser.parse()
+        val declarationParser = DeclarationParser(tokens)
+        return declarationParser.parse()
     }
 
     private fun startPrintStatement(tokens: List<Token>): Node {

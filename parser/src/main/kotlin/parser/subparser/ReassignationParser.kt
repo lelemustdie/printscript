@@ -15,7 +15,7 @@ class ReassignationParser(private val tokens: List<Token>): Parser {
         val valueNode = OperationParser.createValueNode(
             OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator())
             ?: throw Exception("Expected value after reassignment operator")
-        return StatementNode.DeclarationNode(idNode, valueNode)
+        return StatementNode.AssignationNode(idNode, valueNode)
     }
 
 }
