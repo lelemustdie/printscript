@@ -9,7 +9,7 @@ import org.example.parser.ParserImpl
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val text = "let nombre:string = Alan; "
+    val text = "let a: string = 'hola numero'; println(a + 5);"
     // \\
     val strDiv = StringDividerImpl()
     val lexer = LexerImpl()
@@ -23,5 +23,9 @@ fun main() {
     val parser = ParserImpl(tokens)
     val ast = parser.parse()
 //    val astJson = Json.encodeToString(ast)
-    println("AST: $ast")
+//    println("AST: $ast")
+
+    val interpreter = InterpreterImpl(ast)
+    interpreter.interpret()
+    println(interpreter.getVariables())
 }

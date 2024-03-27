@@ -29,12 +29,14 @@ class InterpreterImpl(private val ast : ProgramNode) : Interpreter{
         when(val printable = node.printable){
             is ExpressionNode.LiteralNode -> {printLiteral(printable)}
             is ExpressionNode.IdentifierNode -> {printValueOfId(printable)}
+            is ExpressionNode.BinaryOperationNode -> {
+                println(getExpression(printable).value)}
             else -> throw Exception("Unknown node type")
         }
     }
 
     private fun printLiteral(node : ExpressionNode.LiteralNode){
-        print(node.token.value)
+        println(node.token.value)
     }
 
     private fun printValueOfId(node : ExpressionNode.IdentifierNode){
