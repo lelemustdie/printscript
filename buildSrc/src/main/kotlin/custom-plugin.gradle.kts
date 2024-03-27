@@ -1,18 +1,20 @@
 plugins {
-    id("custom-plugin")
+    id("org.jetbrains.kotlin.jvm")
 }
-
-group = "org.example"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    common()
+    tests()
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+

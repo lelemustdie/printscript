@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")
+    id("custom-plugin")
 }
 
 group = "org.example"
@@ -10,10 +10,5 @@ repositories {
 }
 
 dependencies {
-    tests()
     common()
-}
-
-kotlin {
-    jvmToolchain(21)
 }

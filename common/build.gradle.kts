@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")
+    id("custom-plugin")
     kotlin("plugin.serialization") version "1.9.22"
 }
 
@@ -11,13 +11,9 @@ repositories {
 }
 
 dependencies {
-    tests()
     kotlinxSerialization()
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(21)
 }
