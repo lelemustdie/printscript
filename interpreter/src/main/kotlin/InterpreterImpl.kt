@@ -79,7 +79,36 @@ class InterpreterImpl(private val ast : ProgramNode) : Interpreter{
     }
 
     private fun binaryExpression(node: ExpressionNode.BinaryOperationNode): Literal{
-        return Literal("", TokenType.LITERAL_STRING)
+        val left = getExpression(node.leftChild)
+        val right = getExpression(node.rightChild)
+
+        return when(node.value.type){
+            TokenType.OPERATOR_PLUS -> {evaluateAddition(left, right)}
+            TokenType.OPERATOR_MINUS -> {evaluateSubtraction(left, right)}
+            TokenType.OPERATOR_MULTIPLY -> {evaluateMultiplication(left, right)}
+            TokenType.OPERATOR_DIVIDE -> {evaluateDivision(left, right)}
+            TokenType.LITERAL_NUMBER -> {return Literal((node.value.value),node.value.type)}
+            else -> throw Exception("Unknown operator")
+        }
+    }
+
+    private fun evaluateAddition(left: Literal, right: Literal): Literal{
+        if (left.type == TokenType.LITERAL_NUMBER && right.type == TokenType.LITERAL_NUMBER){
+            return Literal((left.value.toDouble() + right.value.toDouble()).toString(),TokenType.LITERAL_NUMBER)
+        }
+        return Literal((left.value + right.value),left.type)
+    }
+
+    private fun evaluateSubtraction(left: Literal, right: Literal): Literal{
+        return Literal((left.value.toDouble() - right.value.toDouble()).toString(),left.type)
+    }
+
+    private fun evaluateMultiplication(left: Literal, right: Literal): Literal{
+        return Literal((left.value.toDouble() * right.value.toDouble()).toString(),left.type)
+    }
+
+    private fun evaluateDivision(left: Literal, right: Literal): Literal{
+        return Literal((left.value.toDouble() / right.value.toDouble()).toString(),left.type)
     }
 
 
