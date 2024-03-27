@@ -19,21 +19,16 @@ class InterpreterImpl(private val ast : ProgramNode) : Interpreter{
             when (statement) {
                 is StatementNode.PrintNode -> interpretPrintNode(statement)
                 is StatementNode.DeclarationNode -> interpretDeclarationNode(statement)
-                is StatementNode.AssignationNode ->interpretAssignationNode(statement)
+                is StatementNode.AssignationNode -> interpretAssignationNode(statement)
                 else -> throw Exception("Unknown node type")
             }
         }
     }
 
     private fun interpretPrintNode(node: StatementNode.PrintNode) {
-        val printable = node.printable
-        evaluatePrintable(printable)
-    }
-
-    private fun evaluatePrintable(node : Node){
-        when(node){
-            is ExpressionNode.LiteralNode -> {printLiteral(node)}
-            is ExpressionNode.IdentifierNode -> {printValueOfId(node)}
+        when(val printable = node.printable){
+            is ExpressionNode.LiteralNode -> {printLiteral(printable)}
+            is ExpressionNode.IdentifierNode -> {printValueOfId(printable)}
             else -> throw Exception("Unknown node type")
         }
     }
