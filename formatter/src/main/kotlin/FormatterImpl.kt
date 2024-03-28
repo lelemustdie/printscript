@@ -3,6 +3,7 @@ import java.io.File
 import com.google.gson.Gson
 import org.example.ast.nodes.ExpressionNode
 import org.example.ast.nodes.StatementNode
+import org.example.token.TokenType
 
 class FormatterImpl: Formatter{
     override fun format(ast : ProgramNode): String {
@@ -46,7 +47,7 @@ class FormatterImpl: Formatter{
         if (rules.numberSpaceAfterColon > 0) {
             string += " ".repeat(rules.numberSpaceAfterColon)
         }
-        string += node.variable.dataType.typeToken.type
+        string += type(node.variable.dataType.typeToken.type)
         if (rules.numberSpaceBeforeAssignation > 0) {
             string += " ".repeat(rules.numberSpaceBeforeAssignation)
         }
@@ -83,7 +84,7 @@ class FormatterImpl: Formatter{
             }
 
             is ExpressionNode.LiteralNode -> {
-                 node.token.value
+                 node.token.value.toDouble().toInt().toString()
             }
 
             is ExpressionNode.IdentifierNode -> {
@@ -105,5 +106,11 @@ class FormatterImpl: Formatter{
         return "$left $operation $right"
     }
 
-
+    private fun type(type:TokenType): String {
+        return when(type){
+            TokenType.TYPE_NUMBER -> "number"
+            TokenType.TYPE_STRING -> "string"
+            else -> throw Exception("Unknown type")
+        }
+    }
 }
