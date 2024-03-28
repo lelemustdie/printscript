@@ -14,6 +14,6 @@ sealed class StatementNode: Node() {
     data class DeclarationNode(val variable: VariableNode, val expression: ExpressionNode): StatementNode()
 
     @Serializable
-    data class PrintNode( val printable: Node): Node()
+    data class PrintNode( val printable: ExpressionNode): Node()
 
 }

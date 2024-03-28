@@ -3,6 +3,7 @@
     "numberSpacesBeforeColon": 1,
     "numberSpaceAfterColon": 1,
     "numberSpaceBeforeAssignation": 1,
-    "numberSpaceAfterAssignation": 1
+    "numberSpaceAfterAssignation": 1,
+    "numberNewLinesBeforePrint": 2
   }
 }

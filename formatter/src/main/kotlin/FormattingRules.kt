@@ -6,6 +6,7 @@ data class FormattingRules(
     val numberSpaceAfterColon: Int,
     val numberSpaceBeforeAssignation: Int,
     val numberSpaceAfterAssignation: Int,
+    val numberNewLinesBeforePrint: Int
 )
 
 data class FormattingRulesWrapper(

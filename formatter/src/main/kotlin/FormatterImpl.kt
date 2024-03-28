@@ -21,7 +21,7 @@ class FormatterImpl: Formatter{
         var string = ""
         for (statement in ast.getStatements()) {
             when(statement){
-//              is StatementNode.PrintNode -> {string + evaluatePrintNode(statement, rules)}
+              is StatementNode.PrintNode -> {string += evaluatePrintNode(statement, rules)}
                 is StatementNode.DeclarationNode -> {string += evaluateDeclarationNode(statement, rules)}
                 is StatementNode.AssignationNode -> {string += evaluateAssignationNode(statement, rules)}
                 else -> throw Exception("Unknown node type")
@@ -30,10 +30,17 @@ class FormatterImpl: Formatter{
         return string
     }
 
-//    fun evaluatePrintNode(node: StatementNode.PrintNode, rules: FormattingRules): String {
-//        //println();
-//        }
-//    }
+    private fun evaluatePrintNode(node: StatementNode.PrintNode, rules: FormattingRules): String {
+        var string = ""
+        if (rules.numberNewLinesBeforePrint > 0) {
+            string += "\n".repeat(rules.numberNewLinesBeforePrint)
+        }
+        string += "println("
+        string += evaluateExpressionNode(node.printable, rules)
+        string += ");"
+        string += "\n"
+        return string
+    }
 
     private fun evaluateDeclarationNode(node: StatementNode.DeclarationNode, rules: FormattingRules): String {
         //let:number = 5;
