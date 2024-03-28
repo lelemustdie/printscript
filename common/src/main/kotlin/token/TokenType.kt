@@ -8,7 +8,7 @@ enum class TokenType {
     SEMICOLON,
     LITERAL_NUMBER,
     LITERAL_STRING,
-    TYPE_STRING,
+    TYPE_STRING,    // let a:number = 5
     TYPE_NUMBER,
     OPERATOR_PLUS,
     OPERATOR_MINUS,

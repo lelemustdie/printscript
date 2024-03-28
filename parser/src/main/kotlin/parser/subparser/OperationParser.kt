@@ -6,7 +6,7 @@ import org.example.token.TokenType
 
 class OperationParser {
     companion object {
-        fun createValueNode(iterator: ListIterator<Token>): Node? {
+        fun createValueNode(iterator: ListIterator<Token>): ExpressionNode? {
             if (!iterator.hasNext()) return null
 
             // Try parsing complex expressions first
@@ -22,7 +22,7 @@ class OperationParser {
             }
         }
 
-        private fun createComplexExpressionNode(iterator: ListIterator<Token>): Node? {
+        private fun createComplexExpressionNode(iterator: ListIterator<Token>): ExpressionNode? {
             var node = createTermNode(iterator)
             while (iterator.hasNext()) {
                 val token = iterator.next()
@@ -37,7 +37,7 @@ class OperationParser {
             return node
         }
 
-        private fun createTermNode(iterator: ListIterator<Token>): Node? {
+        private fun createTermNode(iterator: ListIterator<Token>): ExpressionNode? {
             var node = createFactorNode(iterator)
             while (iterator.hasNext()) {
                 val token = iterator.next()
@@ -52,7 +52,7 @@ class OperationParser {
             return node
         }
 
-        private fun createFactorNode(iterator: ListIterator<Token>): Node? {
+        private fun createFactorNode(iterator: ListIterator<Token>): ExpressionNode? {
             if (!iterator.hasNext()) return null
             val token = iterator.next()
             return when (token.type) {
