@@ -7,7 +7,7 @@ class TokenSearcher {
     companion object {
         fun searchForToken(tokens: List<Token>, tokenType: TokenType): Token {
             for (token in tokens) {
-                if (token.getType() == tokenType) {
+                if (token.type == tokenType) {
                     return token
                 }
             }
@@ -16,7 +16,7 @@ class TokenSearcher {
 
         fun searchForToken(tokens: List<Token>, tokenTypes: List<TokenType>): Token {
             for (token in tokens) {
-                if (tokenTypes.contains(token.getType())) {
+                if (tokenTypes.contains(token.type)) {
                     return token
                 }
             }
