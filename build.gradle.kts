@@ -15,4 +15,5 @@ dependencies {
     lexer()
     parser()
     kotlinxSerialization()
+    implementation(project(":interpreter"))
 }

@@ -5,3 +5,4 @@ rootProject.name = "printscript"
 include("parser")
 include("common")
 include("lexer")
+include("interpreter")

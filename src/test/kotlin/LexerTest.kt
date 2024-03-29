@@ -27,7 +27,7 @@ class LexerTest {
             Token(TokenType.COLON, ":", 4),
             Token(TokenType.TYPE_NUMBER, "number", 21),
             Token(TokenType.ASSIGNATOR, "=", 8),
-            Token(TokenType.LITERAL_NUMBER, "5", 10),
+            Token(TokenType.LITERAL_NUMBER, "5.0", 10),
             Token(TokenType.SEMICOLON, ";", 12)
         )
         assertEquals(expectedTokens, tokens)
