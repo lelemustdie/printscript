@@ -1,5 +1,6 @@
 plugins {
     id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 repositories {
@@ -8,6 +9,7 @@ repositories {
 
 dependencies {
     tests()
+    kotlinxSerialization()
 }
 
 kotlin {

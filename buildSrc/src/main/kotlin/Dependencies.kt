@@ -23,3 +23,6 @@ fun DependencyHandler.lexer() {
 fun DependencyHandler.parser() {
     implementation(project(":parser"))
 }
+fun DependencyHandler.interpreter() {
+    implementation(project(":interpreter"))
+}
