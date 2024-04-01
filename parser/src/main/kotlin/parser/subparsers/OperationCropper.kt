@@ -5,7 +5,10 @@ import org.example.token.TokenType
 
 class OperationCropper() {
     companion object {
-        fun crop(tokens: List<Token>,type : TokenType): List<Token> {
+        fun crop(
+            tokens: List<Token>,
+            type: TokenType,
+        ): List<Token> {
             val newList = mutableListOf<Token>()
             var foundEquals = false
 

@@ -9,13 +9,14 @@ import org.example.parser.subparsers.OperationCropper
 import org.example.token.Token
 import org.example.token.TokenType
 
-class ReassignationParser(private val tokens: List<Token>): Parser {
+class ReassignationParser(private val tokens: List<Token>) : Parser {
     override fun parse(): Node {
         val idNode = ExpressionNode.IdentifierNode(TokenSearcher.searchForToken(tokens, listOf(TokenType.IDENTIFIER)))
-        val valueNode = OperationParser.createValueNode(
-            OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator())
-            ?: throw Exception("Expected value after reassignment operator")
+        val valueNode =
+            OperationParser.createValueNode(
+                OperationCropper.crop(tokens, TokenType.ASSIGNATOR).listIterator(),
+            )
+                ?: throw Exception("Expected value after reassignment operator")
         return StatementNode.AssignationNode(idNode, valueNode)
     }
-
 }

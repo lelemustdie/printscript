@@ -10,7 +10,10 @@ class StringDividerImpl : StringDivider {
         return listOfWordLists
     }
 
-    private fun lineToWords(line: String, listOfWordLists: MutableList<List<String>>) {
+    private fun lineToWords(
+        line: String,
+        listOfWordLists: MutableList<List<String>>,
+    ) {
         val tokens = mutableListOf<String>()
         var currentToken = StringBuilder()
         var withinQuotes = false
@@ -34,7 +37,7 @@ class StringDividerImpl : StringDivider {
                     }
                 }
                 withinQuotes -> currentToken.append(char)
-                char in setOf(':', ';', '=', '(', ')','+') -> {
+                char in setOf(':', ';', '=', '(', ')', '+') -> {
                     if (currentToken.isNotEmpty()) {
                         tokens.add(currentToken.toString())
                         currentToken = StringBuilder()
@@ -57,5 +60,4 @@ class StringDividerImpl : StringDivider {
 
         listOfWordLists.add(tokens)
     }
-
 }
