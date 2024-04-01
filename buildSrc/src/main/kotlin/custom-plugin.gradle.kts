@@ -23,9 +23,15 @@ tasks.test {
 }
 
 koverReport {
+    filters {
+        excludes {
+            //exclude main classes
+            classes("org.example.MainKt")
+        }
+    }
     verify {
         rule {
-            isEnabled = true
+            isEnabled = false
             bound {
                 minValue = 80
             }

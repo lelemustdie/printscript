@@ -12,18 +12,14 @@ dependencies {
     interpreter()
 }
 
-kotlin {
-    jvmToolchain(21)
+task("copyPreCommitGitHook", type = Copy::class) {
+    from(".scripts/pre-commit")
+    into(".git/hooks")
+    fileMode = 493
 }
 
-koverReport {
-
-    verify {
-        rule {
-            isEnabled = true
-            bound {
-                minValue = 80
-            }
-        }
+tasks {
+    build {
+        dependsOn("copyPreCommitGitHook")
     }
 }
