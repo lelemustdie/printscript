@@ -17,7 +17,4 @@ class LexerImpl() : Lexer {
             }
         }
     }
-
-
-
 }

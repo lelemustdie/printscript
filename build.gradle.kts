@@ -12,8 +12,6 @@ dependencies {
     interpreter()
 }
 
-
-
 kotlin {
     jvmToolchain(21)
 }

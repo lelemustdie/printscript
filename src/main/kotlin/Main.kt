@@ -1,12 +1,10 @@
 package org.example
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.example.lexer.LexerImpl
 import org.example.lexer.stringDivider.StringDividerImpl
 import org.example.parser.ParserImpl
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
     val text = "let a: string = 'hola numero'; println(a + 5);"

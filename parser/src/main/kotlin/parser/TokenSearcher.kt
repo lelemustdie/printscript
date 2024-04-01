@@ -5,7 +5,10 @@ import org.example.token.TokenType
 
 class TokenSearcher {
     companion object {
-        fun searchForToken(tokens: List<Token>, tokenType: TokenType): Token {
+        fun searchForToken(
+            tokens: List<Token>,
+            tokenType: TokenType,
+        ): Token {
             for (token in tokens) {
                 if (token.type == tokenType) {
                     return token
@@ -14,7 +17,10 @@ class TokenSearcher {
             throw Exception("Token not found")
         }
 
-        fun searchForToken(tokens: List<Token>, tokenTypes: List<TokenType>): Token {
+        fun searchForToken(
+            tokens: List<Token>,
+            tokenTypes: List<TokenType>,
+        ): Token {
             for (token in tokens) {
                 if (tokenTypes.contains(token.type)) {
                     return token
