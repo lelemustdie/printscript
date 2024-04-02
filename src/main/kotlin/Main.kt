@@ -21,7 +21,6 @@ fun main() {
 
     val tokens = lexer.tokenize(text)
 
-
     println("Tokens: $tokens")
 
     val parser = ParserImpl(tokens)

@@ -10,6 +10,7 @@ dependencies {
     lexer()
     parser()
     interpreter()
+    formatter()
 }
 
 task("copyPreCommitGitHook", type = Copy::class) {

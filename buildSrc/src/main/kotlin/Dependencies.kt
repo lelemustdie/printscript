@@ -26,3 +26,7 @@ fun DependencyHandler.parser() {
 fun DependencyHandler.interpreter() {
     implementation(project(":interpreter"))
 }
+
+fun DependencyHandler.formatter() {
+    implementation(project(":formatter"))
+}
