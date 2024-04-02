@@ -1,4 +1,4 @@
-package org.example
+package org.example.interpreter
 
 interface Interpreter {
     fun interpret()
