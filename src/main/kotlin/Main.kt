@@ -1,8 +1,8 @@
 package org.example
 
-import FormatterImpl
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.example.formatter.FormatterImpl
 import org.example.lexer.LexerImpl
 import org.example.lexer.stringDivider.StringDividerImpl
 import org.example.parser.ParserImpl

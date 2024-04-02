@@ -1,6 +1,6 @@
-import org.example.InterpreterImpl
 import org.example.ast.nodes.ExpressionNode
 import org.example.ast.nodes.ProgramNode
+import org.example.interpreter.InterpreterImpl
 import org.example.parser.ParserImpl
 import org.example.token.Token
 import org.example.token.TokenType
