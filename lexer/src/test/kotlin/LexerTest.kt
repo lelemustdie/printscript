@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
 
 class LexerTest {
-
     private lateinit var lexer: Lexer
 
     @BeforeEach
@@ -21,15 +20,16 @@ class LexerTest {
 
         val tokens = lexer.tokenize(input)
 
-        val expectedTokens = listOf(
-            Token(TokenType.KEYWORD_LET, "let", 0),
-            Token(TokenType.IDENTIFIER, "x", 2),
-            Token(TokenType.COLON, ":", 4),
-            Token(TokenType.TYPE_NUMBER, "number", 21),
-            Token(TokenType.ASSIGNATOR, "=", 8),
-            Token(TokenType.LITERAL_NUMBER, "5.0", 10),
-            Token(TokenType.SEMICOLON, ";", 12)
-        )
+        val expectedTokens =
+            listOf(
+                Token(TokenType.KEYWORD_LET, "let", 0),
+                Token(TokenType.IDENTIFIER, "x", 2),
+                Token(TokenType.COLON, ":", 4),
+                Token(TokenType.TYPE_NUMBER, "number", 21),
+                Token(TokenType.ASSIGNATOR, "=", 8),
+                Token(TokenType.LITERAL_NUMBER, "5.0", 10),
+                Token(TokenType.SEMICOLON, ";", 12),
+            )
         assertEquals(expectedTokens, tokens)
     }
 

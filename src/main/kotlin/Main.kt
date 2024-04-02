@@ -7,7 +7,7 @@ import org.example.lexer.LexerImpl
 import org.example.lexer.stringDivider.StringDividerImpl
 import org.example.parser.ParserImpl
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
     val text = "let num:number = 2+5+7* 4 + 3 - 8 ;num = 5 "

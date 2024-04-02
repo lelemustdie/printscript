@@ -3,7 +3,7 @@ package org.example.token
 enum class TokenType {
     KEYWORD_LET,
     IDENTIFIER,
-    ASSIGNATOR,  // =
+    ASSIGNATOR, // =
     COLON,
     SEMICOLON,
     LITERAL_NUMBER,
@@ -12,9 +12,9 @@ enum class TokenType {
     TYPE_NUMBER,
     OPERATOR_PLUS,
     OPERATOR_MINUS,
-    OPERATOR_MULTIPLY, //priority 1
-    OPERATOR_DIVIDE,    //priority 1
-    OPERATOR_PRINTLN,   //priority last
+    OPERATOR_MULTIPLY, // priority 1
+    OPERATOR_DIVIDE, // priority 1
+    OPERATOR_PRINTLN, // priority last
     PARENTHESIS_OPEN,
     PARENTHESIS_CLOSE,
 }
