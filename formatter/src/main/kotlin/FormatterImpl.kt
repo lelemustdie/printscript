@@ -6,9 +6,12 @@ import org.example.ast.nodes.StatementNode
 import org.example.token.TokenType
 
 class FormatterImpl: Formatter{
-    override fun format(ast : ProgramNode): String {
-        val jsonFile = File("formatter/src/main/resources/rules.json")
-        val json = jsonFile.readText()
+
+    override fun format(ast: ProgramNode): String {
+        return format(ast, File("formatter/src/main/resources/rules.json"))
+    }
+    fun format(ast : ProgramNode, file: File): String {
+        val json = file.readText()
 
         val gson = Gson()
         val rulesWrapper: FormattingRulesWrapper = gson.fromJson(json, FormattingRulesWrapper::class.java)
@@ -53,9 +56,9 @@ class FormatterImpl: Formatter{
         var string = "let "
         val id = node.variable.identifier.id.value
         string += id
-        spacesBetwenOperator(rules.numberSpacesBeforeColon, rules.numberSpaceAfterColon, ":")
+        spacesBetweenOperator(rules.numberSpacesBeforeColon, rules.numberSpaceAfterColon, ":")
         string += type(node.variable.dataType.typeToken.type)
-        spacesBetwenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
+        spacesBetweenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
         string += evaluateExpressionNode(node.expression, rules)
         string += ";"
         string += "\n"
@@ -63,9 +66,8 @@ class FormatterImpl: Formatter{
     }
 
     private fun evaluateAssignationNode(node: StatementNode.AssignationNode, rules: FormattingRules): String {
-        //nombre = 5;
         var string = node.identifier.id.value
-        spacesBetwenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
+        spacesBetweenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
         string += evaluateExpressionNode(node.expression, rules)
         string += ";"
         string += "\n"
@@ -109,7 +111,7 @@ class FormatterImpl: Formatter{
         }
     }
 
-    private fun spacesBetwenOperator(before: Int, after: Int, operator:String): String {
+    private fun spacesBetweenOperator(before: Int, after: Int, operator:String): String {
         var string = ""
         string += "".repeat(before)
         string += operator
