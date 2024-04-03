@@ -35,3 +35,7 @@ fun DependencyHandler.interpreter() {
 fun DependencyHandler.formatter() {
     implementation(project(":formatter"))
 }
+
+fun DependencyHandler.linter() {
+    implementation(project(":linter"))
+}

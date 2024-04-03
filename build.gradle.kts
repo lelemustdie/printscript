@@ -11,6 +11,7 @@ dependencies {
     parser()
     interpreter()
     formatter()
+    linter()
 }
 
 task("copyPreCommitGitHook", type = Copy::class) {
