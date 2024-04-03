@@ -56,9 +56,9 @@ class FormatterImpl: Formatter{
         var string = "let "
         val id = node.variable.identifier.id.value
         string += id
-        spacesBetweenOperator(rules.numberSpacesBeforeColon, rules.numberSpaceAfterColon, ":")
+        string += spacesBetweenOperator(rules.numberSpacesBeforeColon, rules.numberSpaceAfterColon, ":")
         string += type(node.variable.dataType.typeToken.type)
-        spacesBetweenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
+        string += spacesBetweenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
         string += evaluateExpressionNode(node.expression, rules)
         string += ";"
         string += "\n"
@@ -67,7 +67,7 @@ class FormatterImpl: Formatter{
 
     private fun evaluateAssignationNode(node: StatementNode.AssignationNode, rules: FormattingRules): String {
         var string = node.identifier.id.value
-        spacesBetweenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
+        string += spacesBetweenOperator(rules.numberSpaceBeforeAssignation, rules.numberSpaceAfterAssignation, "=")
         string += evaluateExpressionNode(node.expression, rules)
         string += ";"
         string += "\n"
@@ -81,7 +81,14 @@ class FormatterImpl: Formatter{
             }
 
             is ExpressionNode.LiteralNode -> {
-                 node.token.value.toDouble().toInt().toString()
+                val value = node.token.value
+                val type = node.token.type
+
+                if (type == TokenType.LITERAL_NUMBER){
+                    value.toDouble().toInt().toString()
+                } else {
+                    "\"$value\""
+                }
             }
 
             is ExpressionNode.IdentifierNode -> {
@@ -113,9 +120,9 @@ class FormatterImpl: Formatter{
 
     private fun spacesBetweenOperator(before: Int, after: Int, operator:String): String {
         var string = ""
-        string += "".repeat(before)
+        string += " ".repeat(before)
         string += operator
-        string += "".repeat(after)
+        string += " ".repeat(after)
         return string
     }
 

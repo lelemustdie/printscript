@@ -11,6 +11,8 @@ dependencies {
     parser()
     interpreter()
     formatter()
+    cli()
+    implementation("com.github.ajalt:clikt:2.8.0")
 }
 
 task("copyPreCommitGitHook", type = Copy::class) {

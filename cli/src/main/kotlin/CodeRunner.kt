@@ -1,45 +1,102 @@
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.arguments.optional
+import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
 import org.example.InterpreterImpl
+import org.example.ast.nodes.ProgramNode
 import org.example.lexer.LexerImpl
 import org.example.parser.ParserImpl
 
 class CodeRunner : CliktCommand() {
-    private val inputFile by option("-i", "--input", help = "Input file").file(exists = true, readable = true)
-    private val outputFile by option("-o", "--output", help = "Output file").file(writable = true)
+    private val runOption by option("-r", "--run", help = "Run interpreter")
+        .flag()
+
+    private val linterOption by option("-l", "--linter", help = "Run linter")
+        .flag()
+
+    private val formatOption by option("-f", "--format", help = "Run formatter")
+        .flag()
+
+    private val inputFile by argument(help = "Input file").file(mustExist = true, canBeDir = false, canBeFile = true)
+
+    private val outputFile by argument(help = "Output file for formatter")
+        .file(canBeDir = false, canBeFile = true).optional()
 
     override fun run() {
-        inputFile?.let { file ->
-            // Read the input file
-            val input = file.readText()
+        try {
+            inputFile.let { file ->
+                // Read the input file
+                val input = file.readText()
+                val lexer = LexerImpl()
+                val tokens = lexer.tokenize(input)
 
-            // Process the input based on the command
-            // For example:
-            // - Pass the input through lexer
-            // - Parse the tokens into AST
-            // - Lint or format the AST
-            // - Interpret or compile the code
-            val lexer = LexerImpl()
-            val tokens = lexer.tokenize(input)
+                val parser = ParserImpl(tokens)
+                val ast = parser.parse()
 
-            val parser = ParserImpl(tokens)
-            val ast = parser.parse()
-
-            val interpreter = InterpreterImpl(ast)
-            interpreter.interpret()
-
-            // Dummy output for demonstration
-            val output = "Processed code"
-
-            // Write the output to the output file if provided, otherwise print to console
-            if (outputFile != null) {
-                outputFile!!.writeText(output)
-            } else {
-                println(output)
+                when {
+                    runOption -> runInterpreter(ast)
+                    linterOption -> runLinter(ast)
+                    formatOption -> runFormatter(ast)
+                    else -> {
+                        printHelp()
+                        throw IllegalArgumentException("Please specify one of -r, -l, or -f option. Type -h or --help for help.")
+                    }
+                }
             }
-        } ?: throw IllegalArgumentException("Input file is required")
+        } catch (e: Exception) {
+            echo("Error: ${e.message}", err = true)
+        }
+    }
+
+    private fun runInterpreter(input: ProgramNode) {
+        echo("Running file ${inputFile.name}... \n")
+        val interpreter = InterpreterImpl(input)
+        interpreter.interpret()
+    }
+
+    private fun runLinter(input: ProgramNode) {
+        echo("Running linter on file ${inputFile.name}... \n")
+        echo("not yet implemented")
+    }
+
+    private fun runFormatter(input: ProgramNode) {
+        if (outputFile == null) {
+            echo("Formatting file ${inputFile.name}... \n")
+            val formatter = FormatterImpl()
+            val formatted = formatter.format(input)
+            inputFile.writeText(formatted)
+        } else {
+            echo("Formatting file ${inputFile.name} to ${outputFile!!.name}... \n")
+            val formatter = FormatterImpl()
+            val formatted = formatter.format(input)
+            outputFile!!.writeText(formatted)
+        }
+    }
+
+    private fun printHelp() {
+        echo(
+            """
+            |Usage: printscript [OPTIONS] INPUT_FILE OPTIONAL_OUTPUT_FILE
+            |
+            |Options:
+            |  -r, --run     Run interpreter
+            |  -l, --linter  Run linter
+            |  -f, --format  Run formatter (optional output file)
+            |  -h, --help    Show this message and exit
+            """.trimMargin(),
+        )
+        return
     }
 }
 
-fun main(args: Array<String>) = CodeRunner().main(args)
+// DELETE THIS, THIS IS TEMPORARY
+val run = "-r"
+val testFile = "C:\\Users\\Usuario\\OneDrive\\Documentos\\Austral\\4to\\IngSis\\PrintScript\\testFile.txt"
+val format = "-f"
+val linter = "-l"
+val help = "-h"
+val output = "C:\\Users\\Usuario\\OneDrive\\Documentos\\Austral\\4to\\IngSis\\PrintScript\\outputFile.txt"
+
+fun main(args: Array<String>) = CodeRunner().main(arrayOf(testFile, run))
