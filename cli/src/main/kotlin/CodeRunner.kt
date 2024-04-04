@@ -4,8 +4,10 @@ import com.github.ajalt.clikt.parameters.arguments.optional
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
-import org.example.InterpreterImpl
+import linter.LinterImpl
 import org.example.ast.nodes.ProgramNode
+import org.example.formatter.FormatterImpl
+import org.example.interpreter.InterpreterImpl
 import org.example.lexer.LexerImpl
 import org.example.parser.ParserImpl
 
@@ -58,7 +60,8 @@ class CodeRunner : CliktCommand() {
 
     private fun runLinter(input: ProgramNode) {
         echo("Running linter on file ${inputFile.name}... \n")
-        echo("not yet implemented")
+        val linter = LinterImpl()
+        linter.checkErrors(input).forEach { echo(it.toString()) }
     }
 
     private fun runFormatter(input: ProgramNode) {
@@ -99,4 +102,4 @@ val linter = "-l"
 val help = "-h"
 val output = "C:\\Users\\Usuario\\OneDrive\\Documentos\\Austral\\4to\\IngSis\\PrintScript\\outputFile.txt"
 
-fun main(args: Array<String>) = CodeRunner().main(arrayOf(testFile, run))
+fun main(args: Array<String>) = CodeRunner().main(arrayOf(format, testFile, output))

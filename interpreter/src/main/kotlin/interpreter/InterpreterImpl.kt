@@ -1,4 +1,4 @@
-package org.example
+package org.example.interpreter
 
 import org.example.ast.nodes.ExpressionNode
 import org.example.ast.nodes.Node

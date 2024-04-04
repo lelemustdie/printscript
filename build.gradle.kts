@@ -12,6 +12,7 @@ dependencies {
     interpreter()
     formatter()
     cli()
+    linter()
     implementation("com.github.ajalt:clikt:2.8.0")
 }
 

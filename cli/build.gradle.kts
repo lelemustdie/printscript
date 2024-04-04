@@ -12,6 +12,7 @@ dependencies {
     parser()
     interpreter()
     formatter()
+    linter()
 }
 
 tasks.jar {

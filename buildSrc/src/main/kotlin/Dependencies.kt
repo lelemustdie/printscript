@@ -4,6 +4,7 @@ import org.gradle.kotlin.dsl.project
 object Dependencies {
     const val tests = "org.jetbrains.kotlin:kotlin-test"
     const val jsonSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
+    const val gson = "com.google.code.gson:gson:2.10.1"
 }
 
 fun DependencyHandler.tests() {
@@ -12,6 +13,10 @@ fun DependencyHandler.tests() {
 
 fun DependencyHandler.kotlinxSerialization() {
     implementation(Dependencies.jsonSerialization)
+}
+
+fun DependencyHandler.gson() {
+    implementation(Dependencies.gson)
 }
 
 fun DependencyHandler.common() {
@@ -26,9 +31,14 @@ fun DependencyHandler.parser() {
 fun DependencyHandler.interpreter() {
     implementation(project(":interpreter"))
 }
+
 fun DependencyHandler.formatter() {
     implementation(project(":formatter"))
 }
 fun DependencyHandler.cli() {
     implementation(project(":cli"))
+}
+
+fun DependencyHandler.linter() {
+    implementation(project(":linter"))
 }
